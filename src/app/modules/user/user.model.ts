@@ -1,12 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { TUser } from './user.interface';
-
-// const addressSchema = new Schema({
-//   address: { type: String, required: true },
-//   city: { type: String, required: true },
-//   postalCode: { type: String, required: true },
-//   country: { type: String, required: true },
-// });
+import config from '../../config';
+import bcrypt from 'bcrypt';
 
 const userSchema = new Schema({
   name: { type: String, required: true },
@@ -15,6 +10,17 @@ const userSchema = new Schema({
   phone: { type: String, required: true },
   role: { type: String, required: true, enum: ['admin', 'customer'] },
   address: { type: String, required: true },
+});
+
+userSchema.pre('save', async function (next) {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const user = this;
+  user.password = await bcrypt.hash(
+    user.password,
+    Number(config.bcrypt_salt_rounds),
+  );
+
+  next();
 });
 
 export const User = model<TUser>('User', userSchema);
