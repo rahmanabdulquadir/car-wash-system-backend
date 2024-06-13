@@ -17,10 +17,10 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to the car wash service system server site.');
 });
 
-
+// Global Error Handler
 app.use(globalErrorHandler);
 
-//Not Found
+// Not Found
 app.use(notFound);
 
 

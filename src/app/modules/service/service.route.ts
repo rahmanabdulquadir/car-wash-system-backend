@@ -7,28 +7,30 @@ import { ServiceControllers } from './service.controller';
 const router = express.Router();
 
 router.post(
-  '/create-services',
+  '/create-service',
   validateRequest(
     ServiceSchemaValidations.createServiceSchemaValidation,
   ),
   ServiceControllers.createService,
 );
 
+router.get('/', ServiceControllers.getAllServices);
+
 router.get(
-  '/:serviceId',
+  '/:id',
   ServiceControllers.getSingleService,
 );
 
 router.patch(
-  '/:serviceId',
+  '/:id',
   validateRequest(
     ServiceSchemaValidations.updateServiceSchemaValidation,
   ),
   ServiceControllers.updateService,
 );
 
-router.get('/', ServiceControllers.getAllServices);
+router.delete('/:id', ServiceControllers.deleteService);
 
-router.delete('/:serviceId', ServiceControllers.deleteService);
+
 
 export const ServiceRoutes = router;

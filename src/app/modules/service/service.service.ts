@@ -21,7 +21,7 @@ const updateServiceIntoDB = async (
   id: string,
   payload: Partial<TService>
 ) => {
-  const result = await Service.findOneAndUpdate(
+  const result = await Service.findByIdAndUpdate(
     {_id: id},
     payload,
     {new: true}

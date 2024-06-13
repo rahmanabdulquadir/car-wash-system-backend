@@ -5,18 +5,16 @@ import { ServiceBasedServices } from "./service.service";
 
 const createService = catchAsync(async (req, res) => {
   const result = await ServiceBasedServices.createServiceIntoDB(req.body);
-  console.log(result);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: `Service named ${result.name} is created successfully`,
+    message: `Service created successfully`,
     data: result,
   });
 });
 
 const getAllServices = catchAsync(async (req, res) => {
   const result = await ServiceBasedServices.getAllServicesFromDB();
-  console.log(result);
 
   if (!result.length) {
     sendResponse(res, {
@@ -30,14 +28,14 @@ const getAllServices = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'All the services are retrieved successfully',
+    message: 'Services retrieved successfully',
     data: result,
   });
 });
 
 const getSingleService = catchAsync(async (req, res) => {
-  const { userId } = req.params;
-  const result = await ServiceBasedServices.getSingleServiceFromDB(userId);
+  const { id } = req.params;
+  const result = await ServiceBasedServices.getSingleServiceFromDB(id);
 
   if (!result) {
     sendResponse(res, {
@@ -51,19 +49,28 @@ const getSingleService = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: `Service named (${result?.name}) is retrieved successfully`,
+    message: 'Service retrieved successfully',
     data: result,
   });
 });
 
 const updateService = catchAsync(async (req, res) => {
-  const { id } = req.params;
+  const  {id}  = req.params;
   const result = await ServiceBasedServices.updateServiceIntoDB(id, req.body);
+
+  if (!result) {
+    sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      message: 'No Data Found',
+      data: result,
+    });
+  }
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Service is updated successfully',
+    message: 'Service updated successfully',
     data: result,
   });
 });
@@ -72,10 +79,19 @@ const deleteService = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await ServiceBasedServices.deleteServiceFromDB(id);
 
+   if (!result) {
+    sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      message: 'No Data Found',
+      data: result,
+    });
+  }
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Service is deleted successfully",
+    message: "Service deleted successfully",
     data: result,
   });
 });
