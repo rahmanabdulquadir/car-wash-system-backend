@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { SlotServices } from "./slot.service";
 import { slotValidationSchema } from "./slot.validation";
+import sendResponse from "../../utils.ts/sendResponse";
 
 export const createSlotHandler = async (req: Request, res: Response) => {
   const validation = slotValidationSchema.safeParse(req.body);
@@ -20,5 +21,23 @@ export const createSlotHandler = async (req: Request, res: Response) => {
     });
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
+
+export const getAvailableSlotsHandler = async (req: Request, res: Response) => {
+  try {
+    const { date, serviceId } = req.query;
+    const slots = await SlotServices.getAvailableSlotsFromDB({ date: date as string, serviceId: serviceId as string });
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: 'Available slots retrieved successfully',
+      data: slots,
+    });
+  } catch (error:any) {
+    res.status(400).json({ success: false, message: error.message });
   }
 };

@@ -2,6 +2,7 @@ import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { Service } from '../service/service.model';
 import { Slot } from './slot.model';
+import { TSlot } from './slot.interface';
 
 const createSlotsIntoDB = async (
   serviceId: string,
@@ -44,6 +45,29 @@ const createSlotsIntoDB = async (
   return createdSlots;
 };
 
+
+interface SlotQuery {
+  date?: string;
+  serviceId?: string;
+}
+
+
+const getAvailableSlotsFromDB = async (query: SlotQuery): Promise<TSlot[]> => {
+  const filter: any = { isBooked: 'available' };
+
+  if (query.date) {
+    filter.date = query.date;
+  }
+
+  if (query.serviceId) {
+    filter.service = query.serviceId;
+  }
+
+  const slots = await Slot.find(filter).populate('service');
+  return slots;
+};
+
 export const SlotServices = {
   createSlotsIntoDB,
+  getAvailableSlotsFromDB,
 };

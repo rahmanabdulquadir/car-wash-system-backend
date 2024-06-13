@@ -1,12 +1,12 @@
 import express from 'express'
 import validateRequest from '../../middlewares/validateRequest';
-import { SlotValidations } from './slot.validation';
-import {  createSlotHandler } from './slot.controller';
+import {  createSlotHandler, getAvailableSlotsHandler } from './slot.controller';
 
 
 const router = express.Router();
 
 router.post('/services/slots', createSlotHandler);
+router.get('/slots/availability', getAvailableSlotsHandler);
 
 
 export const SlotRoutes = router;
