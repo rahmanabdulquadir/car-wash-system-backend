@@ -23,6 +23,8 @@ const createBookingIntoDB = async (payload: TBooking) => {
   if (!isCustomerExits) {
     throw new AppError(httpStatus.NOT_FOUND, 'User not found !');
   }
+  // const user = User.isUserExistsByEmail()
+  // console.log(user)
 
   const isServiceExits = await Service.findById(service);
   if (!isServiceExits) {
