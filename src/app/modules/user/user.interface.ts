@@ -29,3 +29,22 @@ export interface UserModel extends Model<TUser> {
 
 
 export type TUserRole = keyof typeof USER_ROLE
+
+
+
+
+
+
+
+
+// import { Document } from 'mongoose';
+
+// export interface IUser extends Document {
+//   name: string;
+//   email: string;
+//   password: string;
+//   phone: string;
+//   role: 'admin' | 'user';
+//   address: string;
+//   correctPassword(candidatePassword: string, userPassword: string): Promise<boolean>;
+// }

@@ -36,7 +36,7 @@ const getAllServices = catchAsync(async (req, res) => {
 const getSingleService = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await ServiceBasedServices.getSingleServiceFromDB(id);
-
+ 
   if (!result) {
     sendResponse(res, {
       statusCode: httpStatus.NOT_FOUND,
@@ -57,6 +57,7 @@ const getSingleService = catchAsync(async (req, res) => {
 const updateService = catchAsync(async (req, res) => {
   const  {id}  = req.params;
   const result = await ServiceBasedServices.updateServiceIntoDB(id, req.body);
+  
 
   if (!result) {
     sendResponse(res, {

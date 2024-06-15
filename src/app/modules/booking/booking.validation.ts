@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const createBookingValidationSchema = z.object({
-  customer: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid customer ID format'), // ObjectId validation
+  // customer: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid customer ID format'), // ObjectId validation
   service: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid service ID format'), // ObjectId validation
   slot: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid slot ID format'), // ObjectId validation
   vehicleType: z.enum([
