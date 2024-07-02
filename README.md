@@ -40,7 +40,8 @@ Follow these steps to set up and run the project locally.
 1. Clone the repository:
 
    ```sh
- https://github.com/rahmanabdulquadir/car-wash-system-backend.git
+   [git clone https://github.com/Anirat04/CWBS-L2-A3.git
+   cd CWBS-L2-A3](https://github.com/rahmanabdulquadir/car-wash-system-backend.git)
    ```
 
 2. Install dependencies:
