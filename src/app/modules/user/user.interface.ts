@@ -1,10 +1,3 @@
-// export type TAddress = {
-//   address: string;
-//   city: string;
-//   postalCode: string;
-//   country: string;
-// }
-
 import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
@@ -13,12 +6,11 @@ export interface TUser {
   email: string;
   password: string;
   phone: string;
-  role: 'admin' | 'customer';
+  role: 'admin' | 'user';
   address: string;
 }
 
 export interface UserModel extends Model<TUser> {
-  // myStaticMethod(): number
   isUserExistsByEmail(email: string): Promise<TUser>;
 
   isPasswordMatched(
@@ -27,24 +19,4 @@ export interface UserModel extends Model<TUser> {
   ): Promise<boolean>;
 }
 
-
-export type TUserRole = keyof typeof USER_ROLE
-
-
-
-
-
-
-
-
-// import { Document } from 'mongoose';
-
-// export interface IUser extends Document {
-//   name: string;
-//   email: string;
-//   password: string;
-//   phone: string;
-//   role: 'admin' | 'user';
-//   address: string;
-//   correctPassword(candidatePassword: string, userPassword: string): Promise<boolean>;
-// }
+export type TUserRole = keyof typeof USER_ROLE;

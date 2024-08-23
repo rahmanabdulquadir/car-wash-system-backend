@@ -2,37 +2,38 @@ import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { User } from '../user/user.model';
 import { TLoginUser } from './auth.interface';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import config from '../../config';
+import { createToken } from './auth.utils';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
+
   const user = await User.isUserExistsByEmail(payload.email);
-
+  // console.log(user)
   if (!user) {
-    throw new AppError(httpStatus.NOT_FOUND, 'This user does not exists!');
+    throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
   }
 
-  // checking if the password matches (hash pass and client given pass)
+  //checking if the password is correct
 
-  if (!(await User.isPasswordMatched(payload?.password, user?.password))) {
+  if (!(await User.isPasswordMatched(payload?.password, user?.password)))
     throw new AppError(httpStatus.FORBIDDEN, 'Password do not matched');
-  }
 
-  // create token and sent to the client
+  //create token and sent to the  client
 
   const jwtPayload = {
-    userEmail: user.email,
+    email: user.email,
     role: user.role,
   };
-  const accessToken = jwt.sign(jwtPayload, config.jwt_access_secret as string, {
-    expiresIn: '15d',
-  });
 
-  // Access granted : send AccessToken and RefreshToken.
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string,
+  );
+
   return {
-    accessToken,
+    accessToken: accessToken,
     user,
   };
 };
