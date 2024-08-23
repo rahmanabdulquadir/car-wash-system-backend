@@ -28,16 +28,6 @@ export const UserValidations = {
   createUserValidationSchema,
 };
 
-
-
-
-
-
-
-
-
-
-
 // import { z } from 'zod';
 
 // export const signUpSchema = z.object({
