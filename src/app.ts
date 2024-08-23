@@ -6,6 +6,7 @@ import notFound from './app/middlewares/notFound';
 
 const app: Application = express();
 
+// parser
 app.use(express.json());
 app.use(cors());
 
@@ -19,7 +20,7 @@ app.get('/', (req: Request, res: Response) => {
 // Global Error Handler
 app.use(globalErrorHandler);
 
-// Not Found route
+// 404 Not Found route handler
 app.use(notFound);
 
 export default app;
