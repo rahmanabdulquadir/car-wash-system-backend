@@ -3,7 +3,8 @@ import { catchAsync } from '../../utils.ts/catchAsync';
 import sendResponse from '../../utils.ts/sendResponse';
 import { IPaymentTokenInfo } from './payment.interface';
 import { paymentService } from './payment.service';
-import { Booking } from '../booking/booking.model';
+import Booking from '../booking/booking.model';
+// import { Booking } from '../booking/booking.model';
 
 export const successPaymentController = catchAsync(async (req, res) => {
   const paymentInfoToken = req.query.pt as string;

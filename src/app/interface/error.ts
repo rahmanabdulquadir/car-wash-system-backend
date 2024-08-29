@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// export type TErrorSources = {
-//   path: string | number;
-//   message: string;
-// }[];
+export type TErrorSources = {
+  path: string | number;
+  message: string;
+}[];
 
-// export type TGenericErrorResponse = {
-//   statusCode: number;
-//   message: string;
-//   errorSources: TErrorSources;
-// };
+export type TGenericErrorResponse = {
+  statusCode: number;
+  message: string;
+  errorSources: TErrorSources;
+};
 
 
 export interface IErrorSource {
-  path: string;
+  path: string | number;
   message: string;
 }
 
