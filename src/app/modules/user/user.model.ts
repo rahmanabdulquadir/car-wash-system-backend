@@ -1,49 +1,89 @@
-import { Schema, model } from 'mongoose';
-import { TUser, UserModel } from './user.interface';
-import config from '../../config';
-import bcrypt from 'bcrypt';
+// // 
 
-const userSchema = new Schema<TUser, UserModel>(
+
+// import mongoose from "mongoose";
+
+// const userScheam = new mongoose.Schema(
+//   {
+//     auth: {
+//       type: mongoose.Types.ObjectId,
+//       required: true,
+//       ref: "Authentication",
+//     },
+//     firstName: {
+//       type: String,
+//       required: true,
+//     },
+//     lastName: {
+//       type: String,
+//       required: true,
+//     },
+//     email: {
+//       type: String,
+//       required: true,
+//     },
+//     phone: {
+//       type: String,
+//       required: true,
+//     },
+//     address: {
+//       type: String,
+//       required: true,
+//     },
+//     image: {
+//       type: String,
+//       required: false,
+//       default: "",
+//     },
+//   },
+//   { timestamps: true }
+// );
+
+// const User = mongoose.model("User", userScheam);
+
+// export default User;
+
+
+
+import mongoose from "mongoose";
+
+const userScheam = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    phone: { type: String, required: true },
-    role: { type: String, required: true, enum: ['admin', 'user'] },
-    address: { type: String, required: true },
+    auth: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "Authentication",
+    },
+    firstName: {
+      type: String,
+      required: true,
+    },
+
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: false,
+      default: "",
+    },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-userSchema.pre('save', async function (next) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const user = this;
-  user.password = await bcrypt.hash(
-    user.password,
-    Number(config.bcrypt_salt_rounds),
-  );
+const User = mongoose.model("User", userScheam);
 
-  next();
-});
-
-// remove password from response
-userSchema.methods.toJSON = function () {
-  const userObject = this.toObject();
-
-  delete userObject.password;
-
-  return userObject;
-};
-
-userSchema.statics.isUserExistsByEmail = async function (email: string) {
-  return await User.findOne({ email });
-};
-
-userSchema.statics.isPasswordMatched = async function (
-  plainTextPassword,
-  hashedPassword,
-) {
-  return await bcrypt.compare(plainTextPassword, hashedPassword);
-};
-
-export const User = model<TUser, UserModel>('User', userSchema);
+export default User;
