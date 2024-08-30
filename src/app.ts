@@ -4,7 +4,6 @@
 // import globalErrorHandler from './app/middlewares/globalErrorHandler';
 // import { notFound } from './app/middlewares/notFound';
 
-
 // const app: Application = express();
 
 // app.use(
@@ -31,12 +30,10 @@
 
 // export default app;
 
-
-
-import express from "express";
-import router from "./app/routes";
-import { notFound } from "./app/middlewares/notFound";
-import globalErrorHandler from "./app/middlewares/globalErrorHandler";
+import express from 'express';
+import router from './app/routes';
+import { notFound } from './app/middlewares/notFound';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import cors from 'cors';
 
 const app = express();
@@ -46,10 +43,10 @@ app.use(express.json());
 app.use(cors());
 // app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
-  res.send("Hello from server");
+app.get('/', (req, res) => {
+  res.send('Hello from car wash service server');
 });
-app.use("/api",router)
+app.use('/api', router);
 // 404 Handler
 app.use(notFound);
 
