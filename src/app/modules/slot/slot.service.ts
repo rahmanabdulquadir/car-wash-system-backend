@@ -88,7 +88,7 @@ const createSlot = async (payload: ISlot, duration: number) => {
   //     "startTime": "09:00",
   //     "endTime": "14:00"
   // }
-  console.log(payload);
+
 
   const startMinutes = timeToMinutes(payload.startTime);
   const endMinutes = timeToMinutes(payload.endTime);

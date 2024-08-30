@@ -1,110 +1,72 @@
-# Car Wash Booking System
+# Polish Pro Server
 
-## Live URL
-https://car-wash-booking-system-backend.vercel.app/
+## Introduction
 
-## Table of Contents
+Welcome to the Project Name repository! This README file will guide you through the steps required to set up and run the project on your local computer.
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Setup and Installation](#setup-and-installation)
-- [API Endpoints](#api-endpoints)
+## Getting Started
 
-## Project Overview
+To get started with the project, follow the instructions below:
 
-**Car Wash Booking System** is a backend application designed to [insert brief description of the project's purpose]. It leverages modern web development technologies to provide a robust, scalable, and maintainable codebase.
+### Prerequisites
 
-## Features
+Make sure you have the following software installed on your machine:
 
-- **User Authentication**: Secure login and registration using JWT.
-- **CRUD Operations**: Comprehensive Create, Read, Update, Delete functionality for [your resources].
-- **Data Validation**: Server-side validation to ensure data integrity.
-- **Type Safety**: Using TypeScript for type-safe code.
-- **Database Integration**: MongoDB integration with Mongoose.
+- Git
+- Node.js (v20.9.0 recommended)
 
-## Technologies Used
+### Cloning the Repository
 
-- **Node.js**: JavaScript runtime built on Chrome's V8 JavaScript engine.
-- **Express.js**: Fast, unopinionated, minimalist web framework for Node.js.
-- **Mongoose**: Elegant MongoDB object modeling for Node.js.
-- **TypeScript**: Typed superset of JavaScript that compiles to plain JavaScript.
-- **npm**: Node package manager for managing dependencies.
+First, clone the repository using the following command:
 
-## Setup and Installation
+```
+git clone https://github.com/rahmanabdulquadir/car-wash-system-backend.git
 
-Follow these steps to set up and run the project locally.
+```
 
-### Installation
+### Installing Dependencies
 
-1. Clone the repository:
+Open the project file in terminal and run `npm install`
 
-   ```sh
-   [git clone https://github.com/Anirat04/CWBS-L2-A3.git
-   cd CWBS-L2-A3](https://github.com/rahmanabdulquadir/car-wash-system-backend.git)
-   ```
+```
+npm install
 
-2. Install dependencies:
+```
 
-   ```sh
-   npm install
-   ```
+### Setting Up Environment Variables
 
-3. Create a `.env` file in the root directory and add the following environment variables:
-   ```
-   NODE_ENV=
-   PORT=
-   DATABASE_URL=
-   BCRYPT_SALT_ROUNDS=12
-   JWT_ACCESS_SECRET=
-   ```
+Create a .env file in the root directory of the project and add your MongoDB credentials:
 
-## API Endpoints
+```
+MONGO_NAME=your mongodb username
+MONGO_PASS=your mongodb password
+MONGO_DB=your database name
+NODE_ENV="development"
+JWT_ACCESS_SECRET=secret key for jwt token
+JWT_REFRESH_SECRET=secret key for jwt token
+CN_Cloud_name=Clodinary cloud name
+CN_Api_key=Clodinary api key
+CN_Api_secret=Clodinary api secret
+CN_Folder=Clodinary folder name
+MAILPASS=gmail id app password
+MAIL=email address
+SIGNATURE_KEY=dbb74894e82415a2f7ff0ec3a97e4183
+STORE_ID=aamarpaytest
+PAYMENT_URL= https://sandbox.aamarpay.com/jsonpost.php
+```
 
-### User Routes
+### Running the Project
 
-1. **User Sign Up**
+Once you have set up the environment variables, you can run the project locally.
 
-   - **Route:** `/api/auth/signup` (**POST**)
-   - **Purpose:** Registers a new user with their personal details and credentials.
+```
+npm run dev
 
-2. **User Login**
-   - **Route:** `/api/auth/login` (**POST**)
-   - **Purpose:** Authenticates a user and returns a JWT token for session management.
+```
 
-### Service Routes
+### Accessing the Project
 
-3. **Create Service (Admin Only)**
+```
+http://localhost:5000
 
-   - **Route:** `/api/services` (**POST**)
-   - **Purpose:** Adds a new car wash service.
-
-4. **Get a Service**
-
-   - **Route:** `/api/services/:id` (**GET**)
-   - **Purpose:** Retrieves details of a specific service.
-
-5. **Get All Services**
-
-   - **Route:** `/api/services` (**GET**)
-   - **Purpose:** Retrieves all available services.
-
-6. **Update Service (Admin Only)**
-
-   - **Route:** `/api/services/:id` (**PUT**)
-   - **Purpose:** Updates details of a specific service.
-
-7. **Delete Service (Admin Only)**
-   - **Route:** `/api/services/:id` (**DELETE**)
-   - **Purpose:** Soft deletes a specific service.
-
-### Slot Routes
-
-8. **Create Slot (Admin Only)**
-
-   - **Route:** `/api/services/slots` (**POST**)
-   - **Purpose:** Adds booking slots for a specific service.
-
-9. **Book a Slot**
-   - **Route:** `/api/slots/:id/` (**POST**)
-   - **Purpose:** Books a slot for a service.
+```

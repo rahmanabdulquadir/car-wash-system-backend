@@ -1,4 +1,3 @@
-
 export interface IPayment {
   amount: number;
   transactionId: string;

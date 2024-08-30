@@ -100,7 +100,7 @@ export const genereteAccessToken = catchAsyncError(async (req, res) => {
   }
 
   const refreshTokenSecret = process.env.JWT_REFRESH_SECRET as string;
-  console.log({ refreshToken, refreshTokenSecret });
+  // console.log({ refreshToken, refreshTokenSecret });
 
   try {
     const decoded = jwt.verify(refreshToken, refreshTokenSecret);
@@ -129,7 +129,7 @@ export const genereteAccessToken = catchAsyncError(async (req, res) => {
       data: { accessToken: newAccessToken, user: isExistUser },
     });
   } catch (error) {
-    console.error('Error decoding or verifying refresh token:', error);
+    // console.error('Error decoding or verifying refresh token:', error);
     res.status(403).json({ message: 'Invalid refresh token' });
   }
 });
